@@ -7,7 +7,7 @@
     "start": "electron .",
     "dev:tailwind": "tailwindcss -i ./style.css -o ./output.css --watch",
     "watch:css": "tailwindcss -i ./style.css -o ./style.css --watch",
-  "dev": "concurrently \"npm run watch:css\" \"npm run start\""
+    "dev": "concurrently \"npm run watch:css\" \"npm run start\""
   },
   "repository": {
     "type": "git",

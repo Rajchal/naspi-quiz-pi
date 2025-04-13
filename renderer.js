@@ -9,7 +9,6 @@ async function fetchQuestion() {
 
     data.options.forEach((opt) => {
       const li = document.createElement("li");
-      li.className = "p-4 bg-gray-800 rounded hover:bg-gray-700";
       li.textContent = opt;
       answers.appendChild(li);
     });
