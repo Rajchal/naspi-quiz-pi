@@ -1,6 +1,6 @@
 async function fetchQuestion() {
   try {
-    const res = await fetch("http://192.168.85.216:5000");
+    const res = await fetch("http://192.168.1.121:5000");
     const data = await res.json();
 
     document.getElementById("question").textContent = data.question;
