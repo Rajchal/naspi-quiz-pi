@@ -27,7 +27,7 @@ async function fetchQuestion() {
     if (showAnswer == "yes") {
       const popppElement = document.getElementById("poppp");
       if (popppElement) {
-        popppElement.className = "text-green-400";
+        popppElement.classList.add("text-green-400");
         popppElement.style.display = "block"; // Ensure the element is visible
       } else {
         console.warn('Element with ID "poppp" not found.');
