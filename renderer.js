@@ -40,4 +40,19 @@ async function fetchQuestion() {
   }
 }
 
+const imageContainer = document.getElementById("image-container");
+const questionContainer = document.getElementById("question-container");
+
+function showImage() {
+  imageContainer.style.display = "block";
+  questionContainer.style.display = "none";
+
+  setTimeout(() => {
+    imageContainer.style.display = "none";
+    questionContainer.style.display = "block";
+    fetchQuestion();
+  }, 4000);
+}
+
+showImage();
 setInterval(fetchQuestion, 3000);
