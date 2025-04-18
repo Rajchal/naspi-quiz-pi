@@ -2,8 +2,9 @@ async function fetchQuestion() {
   try {
     const res = await fetch("http://192.168.1.17:5000");
     const data = await res.json();
-
-    document.getElementById("question").textContent = data.question;
+    const ques = document.getElementById("question");
+    ques.textContent = data.question;
+    ques.classList.remove("animate-pulse");
     const answers = document.getElementById("answers");
     answers.innerHTML = "";
     const showAnswer = data.show;
@@ -31,7 +32,7 @@ async function fetchQuestion() {
         popppElement.classList.remove("bg-gray-700");
         popppElement.classList.add("bg-green-900");
       } else {
-        console.warn('Element with ID "poppp" not found.');
+        console.warn(`Element with ID ${data.correct} not found.`);
       }
     }
   } catch (e) {
