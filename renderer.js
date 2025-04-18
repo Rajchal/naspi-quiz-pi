@@ -11,6 +11,7 @@ async function fetchQuestion() {
     data.options.forEach((opt) => {
       const li = document.createElement("li");
       li.textContent = opt;
+      li.id = inde;
       li.classList.add(
         "bg-gray-700",
         "p-4",
@@ -25,10 +26,10 @@ async function fetchQuestion() {
       inde++;
     });
     if (showAnswer == "yes") {
-      const popppElement = document.getElementById("poppp");
+      const popppElement = document.getElementById(data.correct);
       if (popppElement) {
-        popppElement.classList.add("text-green-400");
-        popppElement.style.display = "block"; // Ensure the element is visible
+        popppElement.classList.remove("bg-gray-700");
+        popppElement.classList.add("bg-green-900");
       } else {
         console.warn('Element with ID "poppp" not found.');
       }
