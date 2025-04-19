@@ -51,7 +51,7 @@ function showImage() {
     imageContainer.style.display = "none";
     questionContainer.style.display = "block";
     fetchQuestion();
-  }, 4000);
+  }, 5000);
 }
 
 showImage();
