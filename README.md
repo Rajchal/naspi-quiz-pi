@@ -1,58 +1,66 @@
 # NASPI Quiz Pi
 
-This repository contains the source code and resources for the **NASPI Quiz Pi** project. The project is designed to provide an interactive quiz application that can be run on a Raspberry Pi.
+A Raspberry Pi-based quiz application designed for educational and entertainment purposes. This project allows users to create, manage, and participate in quizzes with ease.
 
-## Project Structure
+## Features
 
-Below is an overview of the files and directories in this repository:
-
-### Directories
-- **`src/`**: Contains the source code for the application.
-- **`assets/`**: Includes images, audio, and other media files used in the quiz.
-- **`config/`**: Configuration files for customizing the quiz settings.
-- **`tests/`**: Unit tests and integration tests for the application.
-
-### Files
-- **`README.md`**: This file, providing an overview of the project.
-- **`requirements.txt`**: Lists the Python dependencies required to run the application.
-- **`setup.py`**: Script for installing the application as a Python package.
-- **`.env`**: Environment variables for sensitive data like API keys (not included in the repository for security reasons).
-- **`LICENSE`**: The license under which this project is distributed.
+- **Customizable Quizzes**: Create and manage your own quizzes.
+- **User-Friendly Interface**: Simple and intuitive design for all age groups.
+- **Real-Time Scoring**: Instant feedback on quiz performance.
+- **Cross-Platform**: Compatible with Raspberry Pi and other devices.
 
 ## Installation
 
 1. Clone the repository:
     ```bash
     git clone https://github.com/Rajchal/naspi-quiz-pi.git
+    ```
+2. Navigate to the project directory:
+    ```bash
     cd naspi-quiz-pi
     ```
-
-2. Install dependencies:
+3. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-
-3. Run the application:
+4. Run the application:
     ```bash
-    python src/main.py
+    python app.py
     ```
 
-## Features
+## Usage
 
-- Interactive quiz interface.
-- Customizable questions and answers.
-- Support for multimedia content (images, audio, etc.).
-- Scoring and leaderboard functionality.
+1. Launch the application.
+2. Select or create a quiz.
+3. Answer the questions and view your score.
+
+## Requirements
+
+- Raspberry Pi (or any compatible device)
+- Python 3.7+
+- Required Python libraries (see `requirements.txt`)
 
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Commit your changes and push the branch.
-4. Open a pull request.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature-name
+    ```
+3. Commit your changes:
+    ```bash
+    git commit -m "Add feature-name"
+    ```
+4. Push to your branch:
+    ```bash
+    git push origin feature-name
+    ```
+5. Open a pull request.
+
 
 ## Contact
 
-For questions or feedback, please contact [rajchalanjal1@gmail.com].
+For questions or suggestions, feel free to reach out at [rajchalanjal1@gmail.com](mailto:rajchalanjal1@gmail.com).
+
