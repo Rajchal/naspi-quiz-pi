@@ -23,7 +23,7 @@ Below is an overview of the files and directories in this repository:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/naspi-quiz-pi.git
+    git clone https://github.com/Rajchal/naspi-quiz-pi.git
     cd naspi-quiz-pi
     ```
 
