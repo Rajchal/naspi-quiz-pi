@@ -1,5 +1,3 @@
-import { io } from "socket.io-client";
-
 async function fetchQuestion() {
   try {
     const socket = io.connect("http://192.168.1.17:5000/questions-live");
