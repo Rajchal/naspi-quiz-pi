@@ -1,17 +1,16 @@
-async function fetchQuestion() {
+async function fetchQuestion(chapter_name) {
   try {
-    const socket = io.connect("http://192.168.1.17:5000/questions-live");
-    socket.on("question_data", (obj) => {
-      console.log(obj);
-    }); // Emit an event to request questions
+    const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
+    const data = await res.json();
 
     const ques = document.getElementById("question");
     ques.textContent = data.question;
     ques.classList.remove("animate-pulse");
+
     const answers = document.getElementById("answers");
     answers.innerHTML = "";
     const showAnswer = data.show;
-    inde = 0;
+    let inde = 0;
     data.options.forEach((opt) => {
       const li = document.createElement("li");
       li.textContent = opt;
@@ -42,6 +41,9 @@ async function fetchQuestion() {
     console.error("Error fetching question:", e);
   }
 }
+
+// Call fetchQuestion every 3 seconds
+setInterval(fetchQuestion('1-nero_quiz'), 3000);
 
 async function fetchChapter() {
   try {
