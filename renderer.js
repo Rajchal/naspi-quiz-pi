@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
       const data = await res.json();
       const display = data.display;
       if (!display) {
-        imageContainer.style.display = "none";
-        questionContainer.style.display = "block";
+        imageContainer.style.display = "block";
+        questionContainer.style.display = "none";
         switchFlag = false;
         return;
       } 
@@ -80,5 +80,5 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  setInterval(startup, 2000);
+  setInterval(startup, 1000);
 });
