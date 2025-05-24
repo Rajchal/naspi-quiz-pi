@@ -1,80 +1,84 @@
-const imageContainer = document.getElementById("image-container");
-const questionContainer = document.getElementById("question-container");
+document.addEventListener("DOMContentLoaded", function() {
+  const imageContainer = document.getElementById("image-container");
+  const questionContainer = document.getElementById("question-container");
 
-switchFlag = false;
-chapter='none'
+  let switchFlag = false;
+  let chapter = 'none';
+  let myQuestion = [];
 
-async function fetchQuestion(chapter_name) {
-  try {
-    const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
-    const data = await res.json();
-    const display = data.display;
-    if (!display) {
-      imageContainer.style.display = "none";
-      questionContainer.style.display = "block";
-      switchFlag = false;
-      return;
-    } 
+  async function fetchQuestion(chapter_name) {
+    try {
+      const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
+      const data = await res.json();
+      const display = data.display;
+      if (!display) {
+        imageContainer.style.display = "none";
+        questionContainer.style.display = "block";
+        switchFlag = false;
+        return;
+      } 
+      console.log("Question data:", data.question.options);
+      myQuestion = data.question.options;
+      const ques = document.getElementById("question");
+      ques.textContent = data.question.title;
+      ques.classList.remove("animate-pulse");
 
-    const ques = document.getElementById("question-container");
-    ques.textContent = data.question.title;
-    ques.classList.remove("animate-pulse");
-
-    const answers = document.getElementById("answers");
-    answers.innerHTML = "";
-    data.question.options.forEach((opt) => {
-      const li = document.createElement("li");
-      li.textContent = opt;
-      li.classList.add(
-        "bg-gray-700",
-        "p-4",
-        "rounded-lg",
-        "cursor-pointer",
-        "hover:bg-blue-500",
-        "transition",
-        "duration-300",
-        "text-lg"
-      );
-      answers.appendChild(li);
-    });
-  } catch (e) {
-    console.error("Error fetching question:", e);
-  }
-}
-
-
-function showImage() {
-  imageContainer.style.display = "block";
-  questionContainer.style.display = "none";
-}
-
-async function fetchDisplay() {
-  try {
-    const res = await fetch("http://139.59.27.235:5000/display");
-    const data = await res.json();
-    if (data.display){
-      imageContainer.style.display = "block";
-      questionContainer.style.display = "none";
-      chapter=data.quizName;
-      switchFlag = true;
-    }
-    else {  
-      imageContainer.style.display = "none";
-      questionContainer.style.display = "block";
-      questionContainer.classList.add("animate-pulse");
+      const answers = document.getElementById("answers");
+      answers.innerHTML = "";
+      myQuestion.forEach((opt) => {
+        console.log("Option:", opt);
+        const li = document.createElement("li");
+        li.textContent = opt;
+        li.classList.add(
+          "bg-gray-700",
+          "p-4",
+          "rounded-lg",
+          "cursor-pointer",
+          "hover:bg-blue-500",
+          "transition",
+          "duration-300",
+          "text-lg"
+        );
+        answers.appendChild(li);
+      });
+    } catch (e) {
+      console.error("Error fetching question:", e);
     }
   }
-  catch (e) {
-    console.error("Error fetching display:", e);
-  }
-}
 
-showImage();
-function startup(){
-  if (switchFlag) {
-    fetchDisplay();
+  function showImage() {
+    imageContainer.style.display = "block";
+    questionContainer.style.display = "none";
   }
-  else {
-    fetchQuestion();
+
+  async function fetchDisplay() {
+    try {
+      const res = await fetch("http://139.59.27.235:5000/display");
+      const data = await res.json();
+      if (data.display){
+        console.log("Display data:", data);
+        imageContainer.style.display = "none";
+        questionContainer.style.display = "block";
+        chapter = data.quizName;
+        switchFlag = true;
+      }
+    }
+    catch (e) {
+      console.error("Error fetching display:", e);
+    }
   }
-}
+
+  showImage();
+  function startup(){
+    if (!switchFlag) {
+      console.log("Fetching display for chapter:");
+      fetchDisplay();
+    }
+    else {
+      console.log("Fetching question for chapter:");
+      fetchQuestion(chapter);
+    }
+  }
+
+  setInterval(startup, 2000);
+});
