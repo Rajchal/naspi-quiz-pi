@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchQuestion(chapter_name) {
     try {
-      const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
+      const res = await fetch(`http://192.168.4.1:5000/live-quiz/${chapter_name}`);
       const data = await res.json();
       const display = data.display;
       if (!display) {
@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const answers = document.getElementById("answers");
       answers.innerHTML = "";
       myQuestion.forEach((opt) => {
-        console.log("Option:", opt);
         const li = document.createElement("li");
         li.textContent = opt;
         li.classList.add(
@@ -41,6 +40,15 @@ document.addEventListener("DOMContentLoaded", function() {
         );
         answers.appendChild(li);
       });
+      if (data.question['imageRelativePath']!==null){
+        const img = document.getElementById("question-image");
+        img.style.display = "block";
+        img.alt = "Question Image";
+        img.src = "/home/ainas/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'];
+      }else {
+        const img = document.getElementById("question-image");
+        img.style.display = "none";
+      }
     } catch (e) {
       console.error("Error fetching question:", e);
     }
@@ -53,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchDisplay() {
     try {
-      const res = await fetch("http://139.59.27.235:5000/display");
+      const res = await fetch("http://192.168.4.1:5000/display");
       const data = await res.json();
       if (data.display){
         console.log("Display data:", data);
