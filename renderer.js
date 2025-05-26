@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const img = document.getElementById("question-image");
         img.style.display = "block";
         img.alt = "Question Image";
-        img.src = "/home/ainas/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'];
+        img.src = "/home/ainas/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'].split('/')[2];
       }else {
         const img = document.getElementById("question-image");
         img.style.display = "none";
