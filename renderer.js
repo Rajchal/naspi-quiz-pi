@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const img = document.getElementById("question-image");
         img.style.display = "block";
         img.alt = "Question Image";
-        img.src = `.static/images.jpg`
+        img.src = `./static/images.jpg`
         console.log("Image path:", img.src);
         
       }else {
