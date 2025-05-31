@@ -44,8 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const img = document.getElementById("question-image");
         img.style.display = "block";
         img.alt = "Question Image";
-        // Since the Electron app is running on the same server, you can use the absolute path as a file URL
-        img.src = `file:///home/carpediem/api-test/uploads/${chapter_name}/${data.question['imageRelativePath'].split('/')[2]}`;
+        img.src = "/home/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'].split('/')[2];
         console.log("Image path:", img.src);
         
       }else {
