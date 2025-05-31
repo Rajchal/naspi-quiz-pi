@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchQuestion(chapter_name) {
     try {
-      const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
+      const res = await fetch(`http://192.168.1.19:5000/live-quiz/${chapter_name}`);
       const data = await res.json();
       const display = data.display;
       if (!display) {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const img = document.getElementById("question-image");
         img.style.display = "block";
         img.alt = "Question Image";
-        img.src = "/home/ainas/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'].split('/')[2];
+        img.src = "/home/carpediem/api-test/uploads/"+chapter_name+"/"+data.question['imageRelativePath'].split('/')[2];
         console.log("Image path:", img.src);
         
       }else {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchDisplay() {
     try {
-      const res = await fetch("http://139.59.27.235:5000/display");
+      const res = await fetch("http://192.168.1.19:5000/display");
       const data = await res.json();
       if (data.display){
         console.log("Display data:", data);
