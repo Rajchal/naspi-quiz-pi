@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchQuestion(chapter_name) {
     try {
-      const res = await fetch(`http://192.168.4.1:5000/live-quiz/${chapter_name}`);
+      const res = await fetch(`http://139.59.27.235:5000/live-quiz/${chapter_name}`);
       const data = await res.json();
       const display = data.display;
       if (!display) {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchDisplay() {
     try {
-      const res = await fetch("http://192.168.4.1:5000/display");
+      const res = await fetch("http://139.59.27.235:5000/display");
       const data = await res.json();
       if (data.display){
         console.log("Display data:", data);
