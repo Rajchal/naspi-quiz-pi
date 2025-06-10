@@ -1,11 +1,31 @@
 document.addEventListener("DOMContentLoaded", function() {
   const imageContainer = document.getElementById("image-container");
   const questionContainer = document.getElementById("question-container");
+  const pdfPage = document.getElementById("pdf-page");
 
   let switchFlag = false;
   let chapter = 'none';
+  let pdf = 'none';
   let myQuestion = [];
 
+  async function fetchPdfImages(pdfName) {
+    try {
+      const res = await fetch("http://192.168.4.1:5000/pdf-images/" + pdfName);
+      const data = await res.json();
+      const display = data.display;
+      if (!display) {
+        imageContainer.style.display = "none";
+        pdfPage.style.display = "block";
+        switchFlag = false;
+        return;
+      }
+      pdfPage.src = data.images;
+      pdfPage.style.display = "block";
+      pdfPage.alt = "PDF Page Image";
+  } catch (e) {
+      console.error("Error fetching PDF images:", e);
+    }
+  }
 
   async function fetchQuestion(chapter_name) {
     try {
@@ -79,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function showImage() {
     imageContainer.style.display = "block";
+    pdfPage.style.display = "none";
     questionContainer.style.display = "none";
   }
 
@@ -89,7 +110,8 @@ document.addEventListener("DOMContentLoaded", function() {
       if (data.display){
         imageContainer.style.display = "none";
         questionContainer.style.display = "block";
-        chapter = data.quizName;
+        if (chapter){chapter = data.quizName;}
+        if (pdf){pdf=data.pdfName;}
         switchFlag = true;
       }
     }
@@ -101,12 +123,14 @@ document.addEventListener("DOMContentLoaded", function() {
   showImage();
   function startup(){
     if (!switchFlag) {
-      console.log("Fetching display for chapter:");
       fetchDisplay();
     }
     else {
-      console.log("Fetching question for chapter:");
-      fetchQuestion(chapter);
+      if (pdf !== 'none') {
+        fetchPdfImages(pdf);
+      }else if( chapter !== 'none') {
+        fetchQuestion(chapter);
+      }
     }
   }
 
