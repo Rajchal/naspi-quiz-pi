@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
   let myQuestion = [];
 
 
-
-
-
   async function fetchQuestion(chapter_name) {
     try {
       const res = await fetch(`http://192.168.4.1:5000/live-quiz/${chapter_name}`);
