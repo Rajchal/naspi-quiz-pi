@@ -6,9 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
   let chapter = 'none';
   let myQuestion = [];
 
+
+
+
+
   async function fetchQuestion(chapter_name) {
     try {
-      const res = await fetch(`http://192.168.1.19:5000/live-quiz/${chapter_name}`);
+      const res = await fetch(`http://192.168.4.1:5000/live-quiz/${chapter_name}`);
       const data = await res.json();
       const display = data.display;
       if (!display) {
@@ -17,6 +21,16 @@ document.addEventListener("DOMContentLoaded", function() {
         switchFlag = false;
         return;
       } 
+      if (data.audio){
+        const audio =document.getElementById("audio");
+        audio.play();
+
+      }
+      else{
+        const audio =document.getElementById("audio");
+        audio.pause();
+        audio.currentTime = 0;
+      }
       console.log("Question data:", data.question.options);
       myQuestion = data.question.options;
       const ques = document.getElementById("question");
@@ -51,6 +65,16 @@ document.addEventListener("DOMContentLoaded", function() {
         const img = document.getElementById("question-image");
         img.style.display = "none";
       }
+      if (data.question['audioRelativePath']!==null){
+        const audio = document.getElementById("audio");
+        audio.style.display = "block";
+        audio.src = "../api-test/uploads/"+chapter_name+"/"+data.question['audioRelativePath'].split('/')[2];
+        console.log("Audio path:", audio.src);
+      }
+      else {
+        const audio = document.getElementById("audio");
+        audio.style.display = "none";
+      }
     } catch (e) {
       console.error("Error fetching question:", e);
     }
@@ -63,10 +87,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function fetchDisplay() {
     try {
-      const res = await fetch("http://192.168.1.19:5000/display");
+      const res = await fetch("http://192.168.4.1:5000/display");
       const data = await res.json();
       if (data.display){
-        console.log("Display data:", data);
         imageContainer.style.display = "none";
         questionContainer.style.display = "block";
         chapter = data.quizName;
